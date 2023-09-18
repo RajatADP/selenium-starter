@@ -1,11 +1,10 @@
 package pages;
 
-import constants.FrameworkConstants;
 import enums.WaitStrategy;
 import lombok.SneakyThrows;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import utils.FrameworkConfigs;
+import report.ExtentLogger;
 
 public final class LoginPage extends BasePage {
 
@@ -25,7 +24,7 @@ public final class LoginPage extends BasePage {
         sendKeys(driver, userNameField, WaitStrategy.CLICKABLE, userName);
         sendKeys(driver, passwordField, WaitStrategy.CLICKABLE, password);
         click(driver, loginBtn, WaitStrategy.CLICKABLE);
+        ExtentLogger.pass("Login successful");
         return new DashboardPage(driver);
     }
-
 }

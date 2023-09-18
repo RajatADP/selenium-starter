@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import report.ExtentLogger;
 
 public class DashboardPage extends BasePage {
 
@@ -20,9 +21,11 @@ public class DashboardPage extends BasePage {
     public WebElement DashboardPageLoaded() {
         return getElement(driver, pageHeader, WaitStrategy.VISIBLE);
     }
+
     @SneakyThrows
-     public MyInfoPage navigateToMyInfoPage() {
-         click(driver, myInfoSection, WaitStrategy.VISIBLE);
-         return new MyInfoPage(driver);
-     }
+    public MyInfoPage navigateToMyInfoPage() {
+        click(driver, myInfoSection, WaitStrategy.VISIBLE);
+        ExtentLogger.pass("Clicked successfully on " + myInfoSection);
+        return new MyInfoPage(driver);
+    }
 }
