@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="UI-TestSuite" verbose="1" parallel="methods" thread-count="5">
+    <listeners>
+        <listener class-name="listeners.AnnotationTransformer"></listener>
+        <listener class-name="listeners.FrameworkListener"></listener>
+    </listeners>
+    <!--<test name="Smoke" >
+        <classes>
+            <class name="regression.LoginTest" />
+        </classes>
+    </test>-->
+    <test name="Regression" >
+        <packages>
+            <package name="regression.*"></package>
+        </packages>
+    </test>
+</suite>
