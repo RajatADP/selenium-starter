@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface FrameworkAnnotations {
 
-    String author();
+    String author() default "Unknown author";
 
     RunCategory[] category();
 }

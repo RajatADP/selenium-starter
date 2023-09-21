@@ -1,6 +1,6 @@
 package base;
 
-import drivers.DriverFactory;
+import factories.DriverFactory;
 import enums.SupportedBrowser;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

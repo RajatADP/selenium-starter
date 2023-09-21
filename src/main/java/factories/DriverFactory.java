@@ -1,4 +1,4 @@
-package drivers;
+package factories;
 
 import enums.SupportedBrowser;
 import exceptions.BrowserNotSupportedException;

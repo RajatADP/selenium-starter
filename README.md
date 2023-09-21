@@ -79,6 +79,9 @@ This will download the required dependencies and compile the project.
 
 This will run testNG.xml file
 
+## TODO
+
+CICD, Docker setup
 
 
 ## Contributing

@@ -1,6 +1,7 @@
 package utils;
 
 import constants.FrameworkConstants;
+import enums.LocatorStrategy;
 import enums.WaitStrategy;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import report.ExtentLogger;
 
+import java.util.List;
+
+import static factories.LocatorFactory.getByLocator;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CommonUtils {
 
@@ -22,9 +27,10 @@ public final class CommonUtils {
     }
 
     @SneakyThrows
-    public static WebElement performExplicitWait(WebDriver driver, WaitStrategy strategy, By by) {
+    public static WebElement performExplicitWait(WebDriver driver, WaitStrategy strategy, LocatorStrategy locator, String value) {
         WebDriverWait wait = new WebDriverWait(driver, FrameworkConstants.EXPLICITWAITTIMEOUT);
         WebElement element;
+        By by = getByLocator(locator, value);
 
         try {
             switch (strategy) {
@@ -32,6 +38,7 @@ public final class CommonUtils {
                 case CLICKABLE -> element = wait.until(ExpectedConditions.elementToBeClickable(by));
                 default -> element = driver.findElement(by);
             }
+            ExtentLogger.info("Found element by :" + by + "on the page");
         } catch (Exception ex) {
             ExtentLogger.fail("Unable to find element by :" + by + "on the page");
             throw new ElementNotInteractableException("Unable to find element by :" + by + "on the page");

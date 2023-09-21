@@ -1,39 +1,51 @@
 package pages;
 
+import enums.LocatorStrategy;
 import enums.WaitStrategy;
+import factories.LocatorFactory;
 import lombok.SneakyThrows;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import report.ExtentLogger;
 import utils.CommonUtils;
 import utils.FrameworkConfigs;
+
+import java.util.function.Predicate;
 
 public class BasePage {
 
     @SneakyThrows
     protected void openApp(WebDriver driver) {
         driver.get(FrameworkConfigs.config.url());
-        //ExtentLogger.pass("Entered " + value + " in " + elementName, isScreenshotNeeded);
+        ExtentLogger.pass("App opened successfully");
     }
 
     @SneakyThrows
-    protected void sendKeys(WebDriver driver, By by, WaitStrategy waitStrategy, String value) {
-        WebElement element = CommonUtils.performExplicitWait(driver, waitStrategy, by);
-        element.sendKeys(value);
-        //ExtentLogger.pass("Entered " + value + " in " + elementName, isScreenshotNeeded);
+    protected void sendKeys(WebDriver driver, LocatorStrategy locator, String value, WaitStrategy waitStrategy, String textValue) {
+        WebElement element = CommonUtils.performExplicitWait(driver, waitStrategy, locator, value);
+        element.sendKeys(textValue);
+        ExtentLogger.pass("Entered " + textValue);
     }
 
     @SneakyThrows
-    protected void click(WebDriver driver, By by, WaitStrategy waitStrategy) {
-        WebElement element = CommonUtils.performExplicitWait(driver, waitStrategy, by);
+    protected void click(WebDriver driver, LocatorStrategy locator, String value, WaitStrategy waitStrategy) {
+        WebElement element = CommonUtils.performExplicitWait(driver, waitStrategy, locator, value);
         element.click();
-        //ExtentLogger.pass("Entered " + value + " in " + elementName, isScreenshotNeeded);
+        ExtentLogger.pass("Element clicked ");
     }
 
     @SneakyThrows
-    protected WebElement getElement(WebDriver driver, By by, WaitStrategy waitStrategy) {
-        WebElement element = CommonUtils.performExplicitWait(driver, waitStrategy, by);
+    protected void clickAnElementWithMatchingProperty(WebDriver driver, LocatorStrategy locator, String value, Predicate<WebElement> predicate) {
+        WebElement element = driver.findElements(LocatorFactory.getByLocator(locator, value))
+                .parallelStream()
+                .filter(predicate)
+                .findFirst().get();
+        element.click();
+    }
+
+    @SneakyThrows
+    protected WebElement getElement(WebDriver driver, LocatorStrategy locator, String value, WaitStrategy waitStrategy) {
+        WebElement element = CommonUtils.performExplicitWait(driver, waitStrategy, locator, value);
         return element;
-        //ExtentLogger.pass("Entered " + value + " in " + elementName, isScreenshotNeeded);
     }
 }
