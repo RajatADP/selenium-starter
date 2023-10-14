@@ -16,12 +16,13 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        String browser = FrameworkConfigs.config.browser().toUpperCase();
-        driver = DriverFactory.getDriver(SupportedBrowser.valueOf(browser));
+        SupportedBrowser browser = SupportedBrowser.valueOf(FrameworkConfigs.config.browser().toUpperCase());
+        driver = DriverFactory.getDriver(browser, FrameworkConfigs.config.executionType());
     }
 
     @AfterMethod
     public void tearDown() {
         driver.quit();
+        DriverFactory.unLoadDriver();
     }
 }

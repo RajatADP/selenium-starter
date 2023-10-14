@@ -13,22 +13,13 @@ A starter kit for selenium using java.
 
 ## Project Description
 
-This is a sample project that demonstrates the usage of Pact JVM for consumer-driven contract testing in a Java application. It showcases how to create pact tests, generate contract files, and verify them against a provider.
+This is a sample project that demonstrates the usage of Selenium with Java. It has some boilerplate code for UI automation framework.
 
 The project is built using Java and the following technologies:
 
-- [Pact JVM](https://github.com/pact-foundation/pact-jvm): A JVM implementation of the Pact specification for contract testing.
-- [JUnit](https://junit.org/): A unit testing framework for Java.
+- [Selenium](https://www.selenium.dev/): Selenium HQ.
+- [TestNG](https://testng.org/doc/): A test runner for Java.
 - [Maven](https://maven.apache.org/): A build automation tool for Java projects.
-
-## Business Flow
-
-This is a credit card delivering application where we have a consumer(**creditCard**) and a provider(**creditCheck**) build using [SpringBoot](https://spring.io/projects/spring-boot) framework. 
-
-
-For demonstrating contract test we are using a basic application where **creditCheck** service will return credit score as HIGH when it receives **citizenNumber** as 1 from **creditCard** service and returns credit score as LOW when it receives **citizenNumber** as 2.
-
-According to response **creditCard** service will return credit card **GRANTED** or **DENIED** to user.
 
 
 ## Prerequisites
@@ -78,10 +69,6 @@ This will download the required dependencies and compile the project.
    ```
 
 This will run testNG.xml file
-
-## TODO
-
-CICD, Docker setup
 
 
 ## Contributing
